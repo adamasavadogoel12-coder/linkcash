@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Créer un lien – MonSiteLink</title>
+</head>
+<body>
+  <h1>Créer un nouveau lien</h1>
+  <form method="post">
+    {% csrf_token %}
+    <label>URL de la vidéo :</label><br>
+    <input type="url" name="original_url" required style="width: 300px;"><br><br>
+    <button type="submit">Créer le lien</button>
+  </form>
+  <p><a href="{% url 'dashboard' %}">Retour au dashboard</a></p>
+</body>
+</html>

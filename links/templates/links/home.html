@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>MonSiteLink – Accueil</title>
+</head>
+<body>
+  <h1>MonSiteLink</h1>
+  <p>Plateforme de liens vidéo monétisés.</p>
+  {% if user.is_authenticated %}
+    <p>Bonjour {{ user.username }} – <a href="{% url 'dashboard' %}">Dashboard</a> – <a href="{% url 'create_link' %}">Créer un lien</a></p>
+  {% else %}
+    <p><a href="/admin/">Se connecter (admin Django)</a></p>
+  {% endif %}
+</body>
+</html>
