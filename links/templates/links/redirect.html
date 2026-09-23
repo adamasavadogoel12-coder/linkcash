@@ -11,20 +11,34 @@
       margin: 40px auto;
       padding: 0 20px;
       line-height: 1.5;
+      text-align: center;
+    }
+    #continue-btn {
+      margin-top: 20px;
+      padding: 15px 30px;
+      font-size: 18px;
+      cursor: pointer;
+      background: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 8px;
     }
   </style>
 </head>
 <body>
-  <p>Tu vas être redirigé vers la vidéo dans quelques secondes…</p>
+  <p>Clique sur le bouton pour accéder à la vidéo</p>
 
-  <!-- Code HilltopAds -->
+  <button id="continue-btn">Continuer vers la vidéo ▶</button>
+
+  <!-- Code HilltopAds (popunder) -->
   {{ hilltop_code|safe }}
 
   <script>
-    // Redirection après 3 secondes
-    setTimeout(() => {
+    document.getElementById('continue-btn').addEventListener('click', function() {
+      // Le clic déclenche le popunder (géré par le script HilltopAds ci-dessus)
+      // On redirige juste après vers la vidéo
       window.location.href = "{{ destination_url }}";
-    }, 3000);
+    });
   </script>
 </body>
 </html>
