@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from .models import Link, Click
 import random
 import string
@@ -25,6 +25,10 @@ def signup(request):
     else:
         form = UserCreationForm()
     return render(request, 'links/signup.html', {'form': form})
+
+def logout_view(request):
+    logout(request)
+    return redirect('home')
 
 @login_required
 def dashboard(request):
