@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>Redirection – MonSiteLink</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      max-width: 600px;
+      margin: 40px auto;
+      padding: 0 20px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <p>Tu vas être redirigé vers la vidéo dans quelques secondes…</p>
+
+  <!-- Code HilltopAds -->
+  {{ hilltop_code|safe }}
+
+  <script>
+    // Redirection après 3 secondes
+    setTimeout(() => {
+      window.location.href = "{{ destination_url }}";
+    }, 3000);
+  </script>
+</body>
+</html>

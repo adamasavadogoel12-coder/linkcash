@@ -25,9 +25,30 @@ def create_link(request):
         return redirect('dashboard')
     return render(request, 'links/create_link.html')
 
+
 def redirect_link(request, slug):
     link = get_object_or_404(Link, slug=slug)
+
     # Enregistrer le clic
     Click.objects.create(link=link)
-    # Ici, plus tard, on ajoutera la page avec les pubs HilltopAds
-    return redirect(link.original_url)
+
+    # Code HilltopAds Popunder
+    hilltop_code = """
+    <script>
+    (function(vttqs){
+    var d = document,
+        s = d.createElement('script'),
+        l = d.currentScript || d.scripts[d.scripts.length - 1];
+    s.settings = vttqs || {};
+    s.src = "//expensive-pollution.com/c/D/9/6nb.2/5ClfS-WuQw9cNVz/QY1GMyTNIhzNM/yh0Y3pN/D/U/xbM/jZMy3k";
+    s.async = true;
+    s.referrerPolicy = 'no-referrer-when-downgrade';
+    l.parentNode.insertBefore(s, l);
+    })({})
+    </script>
+    """
+
+    return render(request, 'links/redirect.html', {
+        'destination_url': link.original_url,
+        'hilltop_code': hilltop_code,
+    })
