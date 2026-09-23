@@ -16,6 +16,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.contrib.auth import views as auth_views
 from links import views
 
 urlpatterns = [
@@ -24,4 +25,9 @@ urlpatterns = [
     path('dashboard/', views.dashboard, name='dashboard'),
     path('create-link/', views.create_link, name='create_link'),
     path('s/<slug:slug>/', views.redirect_link, name='redirect_link'),
+
+    # Inscription / connexion / déconnexion
+    path('signup/', views.signup, name='signup'),
+    path('login/', auth_views.LoginView.as_view(template_name='links/login.html'), name='login'),
+    path('logout/', auth_views.LogoutView.as_view(next_page='home'), name='logout'),
 ]
