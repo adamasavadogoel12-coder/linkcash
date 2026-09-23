@@ -9,6 +9,8 @@ def generate_slug(length=6):
     return ''.join(random.choice(chars) for _ in range(length))
 
 def home(request):
+    if request.user.is_authenticated:
+        return redirect('dashboard')
     return render(request, 'links/home.html')
 
 @login_required
