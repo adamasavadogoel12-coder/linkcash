@@ -133,3 +133,7 @@ STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATIC_URL = '/static/'
 
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+# Redirections après connexion / déconnexion
+LOGIN_REDIRECT_URL = 'dashboard'
+LOGOUT_REDIRECT_URL = 'home'
