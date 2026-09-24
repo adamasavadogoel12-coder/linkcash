@@ -1,49 +1,12 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>MonSiteLink – Accueil</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 700px;
-      margin: 80px auto;
-      padding: 0 20px;
-      text-align: center;
-      line-height: 1.6;
-    }
-    h1 { font-size: 32px; }
-    .cta {
-      margin-top: 30px;
-    }
-    .cta a {
-      display: inline-block;
-      padding: 12px 28px;
-      margin: 0 8px;
-      border-radius: 8px;
-      text-decoration: none;
-      font-weight: bold;
-    }
-    .signup { background: #2563eb; color: white; }
-    .login { border: 2px solid #2563eb; color: #2563eb; }
-  </style>
-</head>
-<body>
-  <h1>MonSiteLink</h1>
-
-  {% if user.is_authenticated %}
-    <p>Bonjour {{ user.username }}</p>
-    <div class="cta">
-      <a href="{% url 'dashboard' %}" class="signup">Dashboard</a>
-      <a href="{% url 'create_link' %}" class="login">Créer un lien</a>
-    </div>
-  {% else %}
-    <p>Transforme tes liens vidéo en revenus. Crée un lien, partage-le sur ta page, et gagne de l'argent à chaque clic grâce aux publicités affichées avant la vidéo.</p>
-    <div class="cta">
-      <a href="{% url 'signup' %}" class="signup">Créer un compte</a>
-      <a href="{% url 'login' %}" class="login">Se connecter</a>
-    </div>
-  {% endif %}
-</body>
-</html>
+{% extends 'links/base.html' %}
+{% block title %}MonSiteLink – Accueil{% endblock %}
+{% block content %}
+<div class="card" style="text-align:center; padding: 60px 24px;">
+  <h1 style="font-size: 32px; margin-bottom: 12px;">Transforme tes liens vidéo en revenus</h1>
+  <p style="color: var(--text-light); font-size: 17px; max-width: 500px; margin: 0 auto 28px;">
+    Crée un lien, partage-le sur ta page, et gagne de l'argent à chaque clic grâce aux publicités affichées avant la vidéo.
+  </p>
+  <a href="{% url 'signup' %}" class="btn btn-primary" style="margin-right:10px;">Créer un compte</a>
+  <a href="{% url 'login' %}" class="btn btn-outline">Se connecter</a>
+</div>
+{% endblock %}
