@@ -21,6 +21,9 @@
       margin: 0;
       background: var(--bg);
       color: var(--text);
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
     }
     nav {
       background: white;
@@ -76,6 +79,8 @@
       max-width: 900px;
       margin: 40px auto;
       padding: 0 20px;
+      flex: 1;
+      width: 100%;
     }
     .card {
       background: white;
@@ -99,6 +104,19 @@
       list-style: none;
       padding: 0;
     }
+    footer {
+      text-align: center;
+      padding: 20px;
+      color: var(--text-light);
+      font-size: 14px;
+      border-top: 1px solid var(--border);
+      background: white;
+    }
+    footer a {
+      color: #25D366;
+      font-weight: bold;
+      text-decoration: none;
+    }
   </style>
 </head>
 <body>
@@ -120,5 +138,10 @@
   <main>
     {% block content %}{% endblock %}
   </main>
+
+  <footer>
+    Une question ? Contacte-nous sur
+    <a href="https://wa.me/212679750760" target="_blank">WhatsApp</a>
+  </footer>
 </body>
 </html>
