@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>{% block title %}MonSiteLink{% endblock %}</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <style>
+    :root {
+      --primary: #2563eb;
+      --primary-dark: #1d4ed8;
+      --bg: #f8fafc;
+      --text: #1e293b;
+      --text-light: #64748b;
+      --success: #16a34a;
+      --border: #e2e8f0;
+      --card-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    * { box-sizing: border-box; }
+    body {
+      font-family: -apple-system, "Segoe UI", Arial, sans-serif;
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+    }
+    nav {
+      background: white;
+      border-bottom: 1px solid var(--border);
+      padding: 16px 32px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    nav .logo {
+      font-weight: bold;
+      font-size: 20px;
+      color: var(--primary);
+      text-decoration: none;
+    }
+    nav .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+    nav .nav-links a {
+      text-decoration: none;
+      color: var(--text);
+      font-size: 15px;
+    }
+    nav .username {
+      color: var(--text-light);
+      font-size: 14px;
+    }
+    .btn {
+      display: inline-block;
+      padding: 10px 20px;
+      border-radius: 8px;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 15px;
+      border: none;
+      cursor: pointer;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: white;
+    }
+    .btn-outline {
+      background: white;
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+    main {
+      max-width: 900px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .card {
+      background: white;
+      border-radius: 12px;
+      box-shadow: var(--card-shadow);
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      font-size: 15px;
+    }
+    .errorlist {
+      color: #dc2626;
+      font-size: 14px;
+      list-style: none;
+      padding: 0;
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a href="{% url 'home' %}" class="logo">MonSiteLink</a>
+    <div class="nav-links">
+      {% if user.is_authenticated %}
+        <span class="username">👤 {{ user.username }}</span>
+        <a href="{% url 'dashboard' %}">Dashboard</a>
+        <a href="{% url 'create_link' %}" class="btn btn-primary">+ Créer un lien</a>
+        <a href="{% url 'logout' %}">Déconnexion</a>
+      {% else %}
+        <a href="{% url 'login' %}">Se connecter</a>
+        <a href="{% url 'signup' %}" class="btn btn-primary">Créer un compte</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>
