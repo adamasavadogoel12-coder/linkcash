@@ -1,53 +1,13 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Créer un compte – MonSiteLink</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      max-width: 400px;
-      margin: 80px auto;
-      padding: 0 20px;
-    }
-    h2 { text-align: center; }
-    input {
-      width: 100%;
-      padding: 10px;
-      margin: 8px 0;
-      box-sizing: border-box;
-    }
-    button {
-      width: 100%;
-      padding: 12px;
-      background: #2563eb;
-      color: white;
-      border: none;
-      border-radius: 8px;
-      font-weight: bold;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    .errorlist {
-      color: red;
-      font-size: 14px;
-      list-style: none;
-      padding: 0;
-    }
-    p.bottom-link {
-      text-align: center;
-      margin-top: 20px;
-    }
-  </style>
-</head>
-<body>
-  <h2>Créer un compte</h2>
+{% extends 'links/base.html' %}
+{% block title %}Créer un compte – MonSiteLink{% endblock %}
+{% block content %}
+<div class="card" style="max-width: 400px; margin: 0 auto;">
+  <h2 style="text-align:center; margin-top:0;">Créer un compte</h2>
   <form method="post">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">S'inscrire</button>
+    <button type="submit" class="btn btn-primary" style="width:100%;">S'inscrire</button>
   </form>
-  <p class="bottom-link">Déjà un compte ? <a href="{% url 'login' %}">Se connecter</a></p>
-</body>
-</html>
+  <p style="text-align:center; margin-top:16px;">Déjà un compte ? <a href="{% url 'login' %}">Se connecter</a></p>
+</div>
+{% endblock %}
