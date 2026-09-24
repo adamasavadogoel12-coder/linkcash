@@ -94,8 +94,11 @@
   <h1>Transforme tes liens vidéo <span>en revenus</span></h1>
   <p>Crée un lien, partage-le sur ta page, et gagne de l'argent à chaque clic généré par ta communauté.</p>
   <div class="hero-cta">
-    <a href="{% url 'signup' %}" class="btn btn-primary">Se connecter / S'inscrire</a>
-    <a href="#features" class="btn btn-outline">Découvrir</a>
+    <a href="{% url 'signup' %}" class="btn btn-primary">S'inscrire</a>
+    <a href="{% url 'login' %}" class="btn btn-outline">Se connecter</a>
+  </div>
+  <div style="margin-top: 14px;">
+    <a href="#features" style="color: var(--text-light); font-size: 14px; text-decoration: underline;">Découvrir comment ça marche ↓</a>
   </div>
 </section>
 
@@ -150,7 +153,6 @@
 <script>
   AOS.init({ duration: 700, once: true });
 
-  // Carrousel automatique simple
   (function() {
     const track = document.getElementById('sliderTrack');
     const dotsWrap = document.getElementById('sliderDots');
