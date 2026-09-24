@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import login, logout
+from django.db.models import Count
 from .models import Link, Click
 import random
 import string
@@ -20,7 +21,7 @@ def signup(request):
         form = UserCreationForm(request.POST)
         if form.is_valid():
             user = form.save()
-            login(request, user)  # connecte automatiquement après inscription
+            login(request, user)
             return redirect('dashboard')
     else:
         form = UserCreationForm()
@@ -32,8 +33,12 @@ def logout_view(request):
 
 @login_required
 def dashboard(request):
-    links = Link.objects.filter(user=request.user)
-    return render(request, 'links/dashboard.html', {'links': links})
+    links = Link.objects.filter(user=request.user).annotate(click_total=Count('clicks'))
+    total_clicks = sum(link.click_total for link in links)
+    return render(request, 'links/dashboard.html', {
+        'links': links,
+        'total_clicks': total_clicks,
+    })
 
 @login_required
 def create_link(request):
@@ -47,11 +52,8 @@ def create_link(request):
 
 def redirect_link(request, slug):
     link = get_object_or_404(Link, slug=slug)
-
-    # Enregistrer le clic
     Click.objects.create(link=link)
 
-    # Code HilltopAds Popunder
     hilltop_code = """
     <script>
     (function(vttqs){
