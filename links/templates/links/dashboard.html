@@ -1,24 +1,23 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Dashboard – MonSiteLink</title>
-</head>
-<body>
-  <h1>Dashboard</h1>
-  <p>Bonjour {{ user.username }} – <a href="{% url 'create_link' %}">Créer un lien</a></p>
+{% extends 'links/base.html' %}
+{% block title %}Dashboard – MonSiteLink{% endblock %}
+{% block content %}
+<h1>Bonjour {{ user.username }} 👋</h1>
 
-  <h2>Tes liens</h2>
-  <ul>
-    {% for link in links %}
-      <li>
-        {{ link.original_url }} → 
-        <a href="/s/{{ link.slug }}/" target="_blank">/s/{{ link.slug }}/</a>
-        ({{ link.clicks.count }} clics)
-      </li>
-    {% empty %}
-      <li>Aucun lien pour le moment.</li>
-    {% endfor %}
-  </ul>
-</body>
-</html>
+<div class="card">
+  <h2 style="margin-top:0;">Tes liens</h2>
+  {% for link in links %}
+    <div style="display:flex; justify-content:space-between; align-items:center; padding: 12px 0; border-bottom: 1px solid var(--border);">
+      <div>
+        <div style="color: var(--text-light); font-size: 14px;">{{ link.original_url }}</div>
+        <a href="/s/{{ link.slug }}/" target="_blank" style="color: var(--primary); font-weight: bold; text-decoration:none;">/s/{{ link.slug }}/</a>
+      </div>
+      <div style="text-align:right;">
+        <span style="color: var(--success); font-weight: bold; font-size: 18px;">{{ link.clicks.count }}</span>
+        <div style="color: var(--text-light); font-size: 13px;">clics</div>
+      </div>
+    </div>
+  {% empty %}
+    <p style="color: var(--text-light);">Aucun lien pour le moment. <a href="{% url 'create_link' %}">Crée ton premier lien</a>.</p>
+  {% endfor %}
+</div>
+{% endblock %}
