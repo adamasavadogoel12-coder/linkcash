@@ -1,17 +1,13 @@
-<!DOCTYPE html>
-<html lang="fr">
-<head>
-  <meta charset="UTF-8">
-  <title>Créer un lien – MonSiteLink</title>
-</head>
-<body>
-  <h1>Créer un nouveau lien</h1>
+{% extends 'links/base.html' %}
+{% block title %}Créer un lien – MonSiteLink{% endblock %}
+{% block content %}
+<div class="card" style="max-width: 500px; margin: 0 auto;">
+  <h2 style="margin-top:0;">Créer un nouveau lien</h2>
   <form method="post">
     {% csrf_token %}
-    <label>URL de la vidéo :</label><br>
-    <input type="url" name="original_url" required style="width: 300px;"><br><br>
-    <button type="submit">Créer le lien</button>
+    <label>URL de la vidéo</label>
+    <input type="url" name="original_url" required placeholder="https://...">
+    <button type="submit" class="btn btn-primary" style="width:100%; margin-top:10px;">Créer le lien</button>
   </form>
-  <p><a href="{% url 'dashboard' %}">Retour au dashboard</a></p>
-</body>
-</html>
+</div>
+{% endblock %}
