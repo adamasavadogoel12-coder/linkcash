@@ -25,9 +25,9 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-ue0*sd#z#d_998#nb=db-4hqsz$&brw7%@*j_dmh7#v+-w$7o$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', 'True') == 'True'
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['monsitelink.online', 'www.monsitelink.online', '.onrender.com']
 
 
 # Application definition
