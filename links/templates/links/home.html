@@ -1,12 +1,179 @@
 {% extends 'links/base.html' %}
-{% block title %}MonSiteLink – Accueil{% endblock %}
+{% block title %}MonSiteLink – Partage, clique, gagne{% endblock %}
+
 {% block content %}
-<div class="card" style="text-align:center; padding: 60px 24px;">
-  <h1 style="font-size: 32px; margin-bottom: 12px;">Transforme tes liens vidéo en revenus</h1>
-  <p style="color: var(--text-light); font-size: 17px; max-width: 500px; margin: 0 auto 28px;">
-    Crée un lien, partage-le sur ta page, et gagne de l'argent à chaque clic grâce aux publicités affichées avant la vidéo.
-  </p>
-  <a href="{% url 'signup' %}" class="btn btn-primary" style="margin-right:10px;">Créer un compte</a>
-  <a href="{% url 'login' %}" class="btn btn-outline">Se connecter</a>
+
+<!-- AOS (Animate On Scroll) -->
+<link href="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css" rel="stylesheet">
+
+<style>
+  .hero {
+    text-align: center;
+    padding: 80px 20px 60px;
+  }
+  .hero h1 {
+    font-size: 42px;
+    line-height: 1.2;
+    margin-bottom: 16px;
+  }
+  .hero h1 span { color: var(--primary); }
+  .hero p {
+    font-size: 18px;
+    color: var(--text-light);
+    max-width: 560px;
+    margin: 0 auto 32px;
+  }
+  .hero-cta a {
+    margin: 0 8px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+  }
+  .hero-cta a:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(5,150,105,0.25);
+  }
+
+  /* Carrousel */
+  .slider-wrap {
+    max-width: 900px;
+    margin: 60px auto;
+    position: relative;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+  .slider-track {
+    display: flex;
+    transition: transform 0.5s ease;
+  }
+  .slide {
+    min-width: 100%;
+    background: linear-gradient(135deg, var(--primary), #047857);
+    color: white;
+    padding: 48px 32px;
+    text-align: center;
+  }
+  .slide h3 { font-size: 24px; margin-bottom: 8px; }
+  .slide p { opacity: 0.9; margin: 0; }
+  .slider-dots {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin-top: 14px;
+  }
+  .dot {
+    width: 9px; height: 9px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    border: none;
+  }
+  .dot.active { background: var(--primary); }
+
+  /* Grille de fonctionnalités */
+  .features {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+    margin: 60px 0;
+  }
+  .feature-card {
+    text-align: center;
+    padding: 32px 20px;
+    transition: transform 0.25s ease, box-shadow 0.25s ease;
+  }
+  .feature-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+  }
+  .feature-icon { font-size: 34px; margin-bottom: 12px; }
+  .feature-card h4 { margin: 0 0 8px; }
+  .feature-card p { color: var(--text-light); font-size: 14px; margin: 0; }
+</style>
+
+<!-- HERO -->
+<section class="hero" data-aos="fade-up">
+  <h1>Transforme tes liens vidéo <span>en revenus</span></h1>
+  <p>Crée un lien, partage-le sur ta page, et gagne de l'argent à chaque clic généré par ta communauté.</p>
+  <div class="hero-cta">
+    <a href="{% url 'signup' %}" class="btn btn-primary">Se connecter / S'inscrire</a>
+    <a href="#features" class="btn btn-outline">Découvrir</a>
+  </div>
+</section>
+
+<!-- CARROUSEL -->
+<div class="slider-wrap" data-aos="fade-up" data-aos-delay="100">
+  <div class="slider-track" id="sliderTrack">
+    <div class="slide">
+      <h3>🚀 Crée ton lien en 10 secondes</h3>
+      <p>Colle simplement l'URL de ta vidéo et récupère un lien prêt à partager.</p>
+    </div>
+    <div class="slide">
+      <h3>📈 Suis tes clics en temps réel</h3>
+      <p>Ton dashboard affiche le nombre de clics généré par chacun de tes liens.</p>
+    </div>
+    <div class="slide">
+      <h3>💰 Plus de clics, plus de revenus</h3>
+      <p>Chaque clic sur ton lien compte — partage-le partout où ta communauté te suit.</p>
+    </div>
+  </div>
+  <div class="slider-dots" id="sliderDots"></div>
 </div>
+
+<!-- GRILLE DE FONCTIONNALITÉS -->
+<section id="features">
+  <h2 style="text-align:center;" data-aos="fade-up">Comment ça marche</h2>
+  <div class="features">
+    <div class="card feature-card" data-aos="fade-up" data-aos-delay="0">
+      <div class="feature-icon">🔗</div>
+      <h4>1. Crée ton lien</h4>
+      <p>Colle l'URL de ta vidéo et obtiens un lien unique à partager.</p>
+    </div>
+    <div class="card feature-card" data-aos="fade-up" data-aos-delay="100">
+      <div class="feature-icon">📣</div>
+      <h4>2. Partage-le</h4>
+      <p>Publie ton lien sur tes réseaux, ta page ou ta chaîne.</p>
+    </div>
+    <div class="card feature-card" data-aos="fade-up" data-aos-delay="200">
+      <div class="feature-icon">👆</div>
+      <h4>3. Ta communauté clique</h4>
+      <p>Chaque visiteur voit une pub avant d'accéder à la vidéo.</p>
+    </div>
+    <div class="card feature-card" data-aos="fade-up" data-aos-delay="300">
+      <div class="feature-icon">💸</div>
+      <h4>4. Tu es payé</h4>
+      <p>Plus tu as de clics, plus ton gain est élevé.</p>
+    </div>
+  </div>
+</section>
+
+<!-- AOS JS -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.js"></script>
+<script>
+  AOS.init({ duration: 700, once: true });
+
+  // Carrousel automatique simple
+  (function() {
+    const track = document.getElementById('sliderTrack');
+    const dotsWrap = document.getElementById('sliderDots');
+    const slides = track.children;
+    let index = 0;
+
+    for (let i = 0; i < slides.length; i++) {
+      const dot = document.createElement('button');
+      dot.className = 'dot' + (i === 0 ? ' active' : '');
+      dot.addEventListener('click', () => goTo(i));
+      dotsWrap.appendChild(dot);
+    }
+
+    function goTo(i) {
+      index = i;
+      track.style.transform = `translateX(-${index * 100}%)`;
+      [...dotsWrap.children].forEach((d, di) => d.classList.toggle('active', di === index));
+    }
+
+    setInterval(() => {
+      goTo((index + 1) % slides.length);
+    }, 4000);
+  })();
+</script>
+
 {% endblock %}
